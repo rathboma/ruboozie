@@ -11,8 +11,8 @@ class OozieJob < OozieObject
     OozieApi.log(self.id)
   end
   
-  def info
-    OozieJobInfo.new(OozieApi.info(self.id))
+  def reload
+    OozieApi.info(self.id)
   end
   
   def definition

@@ -12,7 +12,21 @@ Full credit goes to @dguttman for most [all] of the code in this project
 Example
 =======
 
-Example goes here.
+OozieApi.setup("http://localhost:11000/oozie")
 
+properties =  {'user.name' => 'matthew', 
+              'oozie.wf.application.path' => 'hdfs:///workflows/hello_world/workflow.xml'}
 
-Copyright (c) 2010 [name of plugin creator], released under the MIT license
+job = OozieApi.submit_job(properties, :action => :start)
+
+puts job.id
+puts job.status
+
+while job.status == "RUNNING"
+  job = job.reload #creates a new object
+  sleep(1)
+end
+
+puts "job status: #{job.status}"
+
+Copyright (c) 2010 @dguttman, @rathboma, released under the MIT license

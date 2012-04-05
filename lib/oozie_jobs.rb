@@ -36,20 +36,20 @@ module OozieJobs
     OozieJob.new oozie_get(resource, :json)
   end
   
-  def submit_job(params)
-    conf = params[:conf_xml]
-    properties = params[:properties_hash]
+  # submit a job given the properties, params optionsl
+  # properties is a hash of the form {name => value}
+  # param example: {:action => :start} [starts the job on submission]
+  def submit_job(properties, params = {})
     
-    body = conf || properties_hash_to_conf_xml(properties)
+    body = properties_hash_to_conf_xml(properties)
     
     start_now = params[:start_now]
-    
-    resource = "/jobs"
-    resource += "?action=start" if start_now
+    proper_params = params.map{|k,v| "#{k}=#{v}"}.join("&")
+    resource = "/jobs?#{proper_params}"
     
     response = oozie_post(resource, :json, :body => body, :headers => {"Content-Type" => "application/xml"})
     id = response['id']
-    id
+    info(id)
   end
 
   def start_job(job_id)
