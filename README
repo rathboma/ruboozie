@@ -1,0 +1,18 @@
+Ruboozie
+========
+A pure-ruby api for Apache Oozie.
+
+Author
+======
+
+This was extracted from https://github.com/dguttman/oozie-web-ui
+Full credit goes to @dguttman for most [all] of the code in this project
+
+
+Example
+=======
+
+Example goes here.
+
+
+Copyright (c) 2010 [name of plugin creator], released under the MIT license
