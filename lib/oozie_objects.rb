@@ -35,6 +35,14 @@ class OozieJob < OozieObject
     OozieApi.kill_job(self.id)
   end
   
+  def finished?
+    !['RUNNING','PREP'].include?(self.status)
+  end
+
+  def failed?
+    ['SUSPENDED', 'KILLED', 'FAILED'].include?(self.status)
+  end
+
   def name; appName; end
   def path; appPath; end
   def console_url; consoleUrl; end

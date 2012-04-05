@@ -1,13 +1,28 @@
 Ruboozie
 ========
-A pure-ruby api for Apache Oozie.
+A ruby library for Apache Oozie.
 
 Author
 ======
 
 This was extracted from https://github.com/dguttman/oozie-web-ui
-Full credit goes to @dguttman for most [all] of the code in this project
+Full credit goes to @dguttman for most of the initial code in this project.
 
+
+Features
+=======
+- tested against oozie 2.x from CDH3u3
+- list jobs
+- query a specific job
+- submit a job [workflow/coordinator]
+- cancel, start, and otherwise modify a job
+- Real models for the classes, not just hashes.
+- hopefully sensible error messages [still needs work]
+
+Meh
+======
+- currently other params for job listing is not supported
+- some error messages don't come through properly in the response headers, so in that case it uses the response body [html], not ideal but better than nothing.
 
 Example
 =======
@@ -22,11 +37,12 @@ job = OozieApi.submit_job(properties, :action => :start)
 puts job.id
 puts job.status
 
-while job.status == "RUNNING"
+while !job.finished?
   job = job.reload #creates a new object
   sleep(1)
 end
 
-puts "job status: #{job.status}"
+puts job.failed? ? "FAILED" : "COMPLETED"
+
 
 Copyright (c) 2010 @dguttman, @rathboma, released under the MIT license

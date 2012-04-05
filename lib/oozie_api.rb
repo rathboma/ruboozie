@@ -37,7 +37,8 @@ class OozieApi
       begin
         MultiJson.decode(response.body)  
       rescue StandardError => e
-        error = OozieException.new("#{response.headers['oozie-error-code']}: #{response.headers['oozie-error-message']}")
+        ex_message = response.headers['oozie-error-code'] ? "#{response.headers['oozie-error-code']}: #{response.headers['oozie-error-message']}": response.body
+        error = OozieException.new(ex_message)
         raise error
       end
     end
@@ -59,7 +60,8 @@ class OozieApi
       begin
         MultiJson.decode(response.body)  
       rescue StandardError => e
-        error = OozieException.new("#{response.headers['oozie-error-code']}: #{response.headers['oozie-error-message']}")
+        ex_message = response.headers['oozie-error-code'] ? "#{response.headers['oozie-error-code']}: #{response.headers['oozie-error-message']}" : response.body
+        error = OozieException.new(ex_message)
         raise error
       end
     end
@@ -83,7 +85,8 @@ class OozieApi
       begin
         MultiJson.decode(response.body)  
       rescue StandardError => e
-        error = OozieException.new("#{response.headers['oozie-error-code']}: #{response.headers['oozie-error-message']}")
+        ex_message = response.headers['oozie-error-code'] ? "#{response.headers['oozie-error-code']}: #{response.headers['oozie-error-message']}": response.body
+        error = OozieException.new(ex_message)
         raise error
       end
     end
