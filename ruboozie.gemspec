@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'ruboozie'
-  s.version     = '0.1.0'
+  s.version     = '0.1.1'
   s.date        = '2012-04-04'
   s.summary     = "A pure-ruby API for Apache oozie"
   s.description = "Apache Oozie [http://incubator.apache.org/oozie/] is a workflow engine for Apache MapReduce jobs. This wrapper lets you submit jobs and stuff from any ruby project"
